@@ -44,7 +44,6 @@ main <- function(){
     transform(Date = as.Date(Date, format = "%d/%m/%Y")) %>% ##, Time = strptime(Time, format = "%H:%M:%S")) %>%
     filter(Date == "2007-02-01" | Date == "2007-02-02")
   
-  
   png(filename = outputFile, width = 480, height = 480)
   hist(data$Global_active_power, col = "red", main = "Global Active Power",
        xlab = "Global Active Power (kilowatts)")
