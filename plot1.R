@@ -36,6 +36,9 @@ readDataFile <- function(fileName, ...){
 main <- function(){
   downloadAndExtractZipFile()
   
+  ## TODO
+  ## Merge Date + Time variables and convert to Date/Time class
+  
   data <- 
     readDataFile(localFile, sep = ";", header = TRUE, na.strings = "?") %>%
     transform(Date = as.Date(Date, format = "%d/%m/%Y")) %>% ##, Time = strptime(Time, format = "%H:%M:%S")) %>%
