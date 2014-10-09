@@ -33,22 +33,26 @@ readDataFile <- function(fileName, ...){
   read.table(fileName, ...)
 }
 
+## Get the data from the filw and returns the rows for 2007-02-01 and 2007-02-02 only
+getSubSetData <- function(){
+  dt <- readDataFile(localFile, sep = ";", header = TRUE, na.strings = "?") %>%
+    transform(DateTime = strptime(paste(Date, Time), "%d/%m/%Y %H:%M:%S"), 
+              Date = as.Date(Date, format = "%d/%m/%Y")) %>%
+    filter(Date == "2007-02-01" | Date == "2007-02-02")
+  
+  dt
+}
+
 main <- function(){
   downloadAndExtractZipFile()
   
-  ## TODO
-  ## Merge Date + Time variables and convert to Date/Time class
-  data <- 
-    readDataFile(localFile, sep = ";", header = TRUE, na.strings = "?") %>%
-    transform(Date = as.Date(Date, format = "%d/%m/%Y")) %>% ##, Time = strptime(Time, format = "%H:%M:%S")) %>%
-    filter(Date == "2007-02-01" | Date == "2007-02-02")
+  data <- getSubSetData()
+    
+  png(filename = outputFile, width = 480, height = 480, bg = "transparent")
+  with(data, plot(DateTime, Global_active_power, type = "l", ylab = "Global Active Power (kilowatts)", xlab = ""))
+  dev.off()
   
-  
-  #png(filename = outputFile, width = 480, height = 480)
-  #with(data, plot(Time2, Global_active_power, type = "l"))
-  
-  print(paste("Plot 2 created - ", outputFile))
-
-data
+  print(paste("Plot 2 created -", outputFile))
 }
 
+main()
