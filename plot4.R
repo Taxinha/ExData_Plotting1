@@ -51,7 +51,8 @@ main <- function(){
   png(filename = outputFile, width = 480, height = 480, bg = "transparent")
   par(mfrow = c(2, 2))
   ## 1st graphic
-  with(data, plot(DateTime, Global_active_power, type = "l", ylab = "Global Active Power", xlab = ""))
+  with(data, plot(DateTime, Global_active_power, type = "l", 
+                  ylab = "Global Active Power", xlab = ""))
   
   ## 2nd graphic
   with(data, plot(DateTime, Voltage, type = "l", xlab = "datetime"))

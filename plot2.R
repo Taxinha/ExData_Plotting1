@@ -49,7 +49,8 @@ main <- function(){
   data <- getSubSetData()
     
   png(filename = outputFile, width = 480, height = 480, bg = "transparent")
-  with(data, plot(DateTime, Global_active_power, type = "l", ylab = "Global Active Power (kilowatts)", xlab = ""))
+  with(data, plot(DateTime, Global_active_power, type = "l", 
+                  ylab = "Global Active Power (kilowatts)", xlab = ""))
   dev.off()
   
   print(paste("Plot 2 created -", outputFile))
